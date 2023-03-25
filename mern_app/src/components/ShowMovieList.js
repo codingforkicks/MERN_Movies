@@ -39,14 +39,14 @@ function ShowMovieList() {
             </div>
 
             <div className='col-md-11'>
-                {/*
+                
                 Add conditional "add movie" render for admin user                 
                 <Link
                 to='/addMovie'
                 className='btn btn-outline-warning float-right'
                 >
                 + Add New Movie
-                </Link> */}
+                </Link>
                 <br />
                 <br />
                 <hr />
