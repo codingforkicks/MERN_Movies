@@ -25,7 +25,7 @@ const CreateMovie = (props) => {
         e.preventDefault();
 
         axios
-        .post('http://localhost:8082/api/movies', movie)
+        .post('http://localhost:8082/addMovie', movie)
         .then((res) => {
             console.log(res);
             setMovie({
