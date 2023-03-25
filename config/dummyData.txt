@@ -1,0 +1,36 @@
+#show all databases
+    - show dbs
+
+#show collections
+    - show collections
+
+#db.collection.find().pretty()
+    - return collection data
+
+The following commands will add test data to MongoDB CLI
+
+#create the database
+use moviesapi
+
+#create collections
+db.createCollection("movies")
+db.createCollection("users")
+db.createCollection("reviews")
+
+#insert mock data
+db.movies.insert([
+{"title": "Creed III", "year": 2023, genre: "Action"},
+{"title": "Creed II", "year": 2018, genre: "Action"},
+{"title": "Creed", "year": 2015, genre: "Action"},
+{"title": "Rocky Balboa", "year": 2006, genre: "Action"},
+{"title": "Rocky V", "year": 1990, genre: "Action"},
+{"title": "Rocky IV: Rocky vs Drago", "year": 1985, genre: "Action"},
+{"title": "Rocky III", "year": 1982, genre: "Action"},
+{"title": "Rocky II", "year": 1979, genre: "Action"},
+{"title": "Rocky", "year": 1976, genre: "Action"}
+])
+
+db.users.insert([
+    {"username": admin, "password": TCSmongo2023!, "admin": true}
+])
+
