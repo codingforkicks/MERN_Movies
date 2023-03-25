@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import MovieCard from './MovieCard';
 
 function ShowMovieList() {
     const [movies, setMovies] = useState([]);
@@ -23,10 +24,10 @@ function ShowMovieList() {
     }, []);
 
     //map through indivdual movies
-    // const movieList = 
-    //     movies.length ==== 0 
-    //     ? 'Sorry, there are no movies' 
-    //     : movies.map((movie, i) => <MovieCard moovie={movie} />);
+    const movieList = 
+        movies.length === 0 
+        ? 'Sorry, there are no movies' 
+        : movies.map((movie, id) => <MovieCard movie={movie} key={id}/>);
 
     return (
         <div className='ShowMovieList'>
@@ -51,7 +52,7 @@ function ShowMovieList() {
                 <hr />
             </div>
             </div>
-            {/* <div className='list'>{movieList}</div> */}
+            <div className='list'>{movieList}</div>
         </div>
     </div>
     );
