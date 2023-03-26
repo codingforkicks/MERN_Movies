@@ -64,17 +64,21 @@ const CreateMovie = (props) => {
                     className='form-control'
                     value={movie.title}
                     onChange={onChange}
+                    required
                     />
                 </div>
                 <br />
                 <div className='form-group'>
                     <input
-                    type='text'
+                    type='number'
                     placeholder='Year'
                     name='year'
                     className='form-control'
+                    min="1895"
+                    max="3000"
                     value={movie.year}
                     onChange={onChange}
+                    required
                     />
                 </div>
                 <div className='form-group'>
@@ -85,6 +89,7 @@ const CreateMovie = (props) => {
                     className='form-control'
                     value={movie.genre}
                     onChange={onChange}
+                    required
                     />
                 </div>
                 <input

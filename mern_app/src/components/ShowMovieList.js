@@ -15,10 +15,8 @@ function ShowMovieList() {
         axios
         .get('http://localhost:8082/movies')
         .then((res) => {
-            console.log(res.data);
             setMovies(res.data);
         }).catch((err) => {
-            console.log(err.response);
             console.log(`Error in Show Movie List: ${err}`);
         });
     }, []);

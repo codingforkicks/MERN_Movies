@@ -19,12 +19,13 @@ function ShowMovieDetails(props) {
         axios
         .get(`http://localhost:8082/reviews/${id}`)
         .then((res) => {
-            console.log(res.data);
             setMovie(res.data);
         }).catch((err) => {
             console.log(`Error from ShowMovieDetails: ${err}`);
         });
     }, [id]);
+
+
 
     const onDeleteClick = (id) => {
         axios
