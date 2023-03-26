@@ -56,6 +56,7 @@ exports.getMovies = async (req, res) => {
       }
     });
     return {
+      id: movie._id,
       title: movie.title,
       genre: movie.genre,
       year: movie.year,

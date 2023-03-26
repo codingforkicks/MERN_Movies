@@ -27,7 +27,9 @@ function ShowMovieList() {
     const movieList = 
         movies.length === 0 
         ? 'Sorry, there are no movies' 
-        : movies.map((movie, id) => <MovieCard movie={movie} key={id}/>);
+        : movies.map((movie) => 
+        <MovieCard movie={movie} key={movie.id} />
+        );
 
     return (
         <div className='ShowMovieList'>
@@ -39,7 +41,6 @@ function ShowMovieList() {
             </div>
 
             <div className='col-md-11'>
-                
                 Add conditional "add movie" render for admin user                 
                 <Link
                 to='/addMovie'

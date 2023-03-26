@@ -67,7 +67,7 @@ function ShowMovieDetails(props) {
                 <div className='row'>
                 <div className='col-md-10 m-auto'>
                     <br /> <br />
-                    <Link to='/' className='btn btn-outline-warning float-left'>
+                    <Link to='/showList' className='btn btn-outline-warning float-left'>
                     Show Movie List
                     </Link>
                 </div>
@@ -77,7 +77,7 @@ function ShowMovieDetails(props) {
                     <p className='lead text-center'>View Movie's Info</p>
                     <hr /> <br />
                 </div>
-                <div className='col-md-10 m-auto'>{BookItem}</div>
+                <div className='col-md-10 m-auto'>{MovieItem}</div>
                 <div className='col-md-6 m-auto'>
                     <button
                     type='button'
