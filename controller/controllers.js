@@ -5,21 +5,31 @@ const bcrypt = require("bcryptjs");
 
 exports.login = async (req, res) => {
   let user = await User.findOne({ username: req.body.username });
-
-  if (user) {
-    console.log(req.body.password);
-    console.log(user);
-    let match = await bcrypt.compare(req.body.password, user.password);
-    console.log(match);
-    if (match) {
-      let reviews = await Review.find({ enteredBy: user._id });
-      res.status(200).json({ auth: true, reviews });
+  try{
+    if(user) {
+      let passwordMatch = await bcrypt.compare(req.body.password, user.password);
+      if (passwordMatch) {
+        let reviews = await Review.find({ enteredBy: user._id });
+        res.status(200).json({ auth: true, reviews });
+      } else {
+        res.status(406).json({
+          message: "user not authenicated",
+          auth: false
+        });
+      }
     } else {
-      res.status(200).json({ auth: false });
+      res.status(407).json({
+        message: "user not authenicated",
+        auth: false
+      });
     }
-  } else {
-    res.status(200).json({ auth: false });
-  }
+  } catch(err) {
+    res.status(408).json({
+      message: "invalid username or password",
+      auth: false
+    });
+    res.end();
+  };
 };
 
 exports.register = async (req, res) => {
@@ -41,7 +51,6 @@ exports.getMovies = async (req, res) => {
     let count = 0;
     reviews.map((review) => {
       if (review.movie.toString() === movie._id.toString()) {
-        console.log(review);
         sum = sum + review.rating;
         count++;
       }
@@ -57,12 +66,21 @@ exports.getMovies = async (req, res) => {
 };
 
 exports.addMovie = async (req, res) => {
-  try {
-    let query = await Movie.create(req.body);
-    res.status(201).json(query);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: err });
+  //check to see if movie already exists in the database
+  let doesExists = await Movie.exists({
+    title: req.body.title,
+    genre: req.body.genre,
+    year: req.body.year
+  });
+
+  if(doesExists === null) {
+    try {
+      let query = await Movie.create(req.body);
+      res.status(201).json(query);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err });
+    }
   }
 };
 
@@ -71,11 +89,11 @@ exports.getReviews = async (req, res) => {
   let averageRating =
     reviews.reduce((results, review) => results + review.rating, 0) /
     reviews.length;
-  console.log(averageRating);
   res.status(200).json({ reviews: reviews, averageRating: averageRating });
 };
 
 exports.addReview = async (req, res) => {
+  console.log(req.body);
   let query = await Review.create(req.body);
   res.status(201).json(query);
 };
