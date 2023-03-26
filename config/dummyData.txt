@@ -31,4 +31,4 @@ db.movies.insert([
 ])
 
 #Login Password: TCSmongo2023!
-//db.users.insert([{"username": "admin", "password": "", "admin": true}])
+//db.users.insert([{"username": "admin", "password": "$2a$06$RphbkDvKCOpLK8NgcPw/uOgVT5YtVNdlK58fq11g15/mc39T60bsq", "admin": true}])
