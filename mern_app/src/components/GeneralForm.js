@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import FormErrors from './FormErrors';
+import '../styles/style.css';
 
 const Form = (props) => {
 
@@ -147,7 +148,7 @@ const Form = (props) => {
                 <h1 className='display-4 text-center'>123 Movies</h1>
                 <p className='lead text-center'>{props.header}</p>
 
-                <form noValidate onSubmit={onSubmit}>
+                <form onSubmit={onSubmit}>
                 <div className={`form-group ${errorClass(formErrors.errors.username)}`}>
                     <input
                         type='text'
