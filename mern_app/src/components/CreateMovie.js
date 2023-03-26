@@ -34,7 +34,7 @@ const CreateMovie = (props) => {
                 genre: ''
             });
 
-            navigate('/');
+            navigate('/showList');
         })
         .catch((err) => {
             console.log(`Error in create movie: ${err}`);
@@ -47,7 +47,7 @@ const CreateMovie = (props) => {
             <div className='row'>
             <div className='col-md-8 m-auto'>
                 <br />
-                <Link to='/' className='btn btn-outline-warning float-left'>
+                <Link to='/showList' className='btn btn-outline-warning float-left'>
                 Show Movie List
                 </Link>
             </div>
