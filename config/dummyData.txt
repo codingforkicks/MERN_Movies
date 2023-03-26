@@ -30,7 +30,5 @@ db.movies.insert([
 {"title": "Rocky", "year": 1976, genre: "Action"}
 ])
 
-db.users.insert([
-    {"username": admin, "password": TCSmongo2023!, "admin": true}
-])
-
+#Login Password: TCSmongo2023!
+//db.users.insert([{"username": "admin", "password": "", "admin": true}])
