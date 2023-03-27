@@ -59,7 +59,8 @@ const Form = (props) => {
                     passwordValid: false,
                     formValid: false
                 });
-    
+                
+                alert(`${props.url} successful`);
                 navigate(props.successForward);
             }
         })
