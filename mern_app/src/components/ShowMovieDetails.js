@@ -1,108 +1,62 @@
-/*
-can see all reviews and rating (reviews/:movieId api) should have a review button that takes the
-user to review form, in this step the info of the movie and user should be sent over to the review form
-somehow.
-*/
-
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import MovieCard from './MovieCard';
+import AddReviewForm from './AddReviewForm';
+import ShowReviews from './ShowReviews';
 
-function ShowMovieDetails(props) {
+function ShowMovieDetails() {
     const [movie, setMovie] = useState({});
+    const [reviews, setReviews] = useState({});
 
     const {id} = useParams();
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         axios
-        .get(`http://localhost:8082/reviews/${id}`)
+        .get(`http://localhost:8082/movie/${id}`)
         .then((res) => {
-            console.log(res.data);
-            setMovie(res.data);
+            setMovie(res.data.movie);
+            axios
+                .get(`http://localhost:8082/reviews/${id}`)
+                .then((res) => {
+                    setReviews(res.data);
+            })
         }).catch((err) => {
-            console.log(`Error from ShowMovieDetails: ${err}`);
-        });
-    }, [id]);
-
-
-
-    const onDeleteClick = (id) => {
-        axios
-        .delete(`http://localhost:8082/reviews/${id}`)
-        .then((res) => {
-            console.log("delete successful");
-            navigate('/');
-        }).catch((err) => {
-            console.log(`Error from ShowMovieDetails delete: ${err}`);
-        });
-    };
-
-    const MovieItem = (
-        <div>
-            <table className='table table-hover table-dark'>
-                <tbody>
-                <tr>
-                    <th scope='row'>1</th>
-                    <td>Title</td>
-                    <td>{movie.title}</td>
-                </tr>
-                <tr>
-                    <th scope='row'>2</th>
-                    <td>Year</td>
-                    <td>{movie.year}</td>
-                </tr>
-                <tr>
-                    <th scope='row'>3</th>
-                    <td>Genre</td>
-                    <td>{movie.genre}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    );
+            console.log(`Error in Show Movie: ${err}`);
+        })
+    }, []);
 
     return (
         <div className='ShowMovieDetails'>
-            <div className='container'>
-                <div className='row'>
-                <div className='col-md-10 m-auto'>
-                    <br /> <br />
-                    <Link to='/showList' className='btn btn-outline-warning float-left'>
+        <div className='container'>
+            <div className='row'>
+            <div className='col-md-12'>
+            <br />
+                <Link to='/showList' className='btn btn-outline-warning float-left'>
                     Show Movie List
-                    </Link>
-                </div>
+                </Link>
+                <Link to='/' className='btn btn-outline-warning float-right'>Sign Out</Link>
                 <br />
-                <div className='col-md-8 m-auto'>
-                    <h1 className='display-4 text-center'>Movie's Record</h1>
-                    <p className='lead text-center'>View Movie's Info</p>
-                    <hr /> <br />
-                </div>
-                <div className='col-md-10 m-auto'>{MovieItem}</div>
-                <div className='col-md-6 m-auto'>
-                    <button
-                    type='button'
-                    className='btn btn-outline-danger btn-lg btn-block'
-                    onClick={() => {
-                        onDeleteClick(movie._id);
-                    }}
-                    >
-                    Delete Review
-                    </button>
-                </div>
-                {/* option to edit review if already exists
-                    <div className='col-md-6 m-auto'>
-                    <Link
-                    to={`/reviews/edit/${movie._id}`}
-                    className='btn btn-outline-info btn-lg btn-block'
-                    >
-                    Edit Review
-                    </Link>
-                </div> */}
-                </div>
+                <br /> <br />
+                <h2 className='display-4 text-center'>Movie</h2>
             </div>
+
+            <div className='col-md-11'>
+            </div>
+            </div>
+            <div className='list text-center'>
+                <MovieCard movie={movie} key={movie.id} disabled={'disabled-link'}/>
+            </div>
+            <div>
+                <ShowReviews reviews={reviews} />
+            </div>
+            <Link to={`/movie/${id}/addReview`} className='btn btn-outline-warning float-left'>
+                    Add Review
+            </Link>
         </div>
+    </div>
     );
 };
 
