@@ -17,7 +17,7 @@ const MovieCard = (props) => {
             />
             <div className='desc'>
                 <h2>
-                <Link to={`/reviews/${movie.id}`}>{movie.title}</Link>
+                <Link to={`/movie/${movie.id}`} className={props.disabled}>{movie.title}</Link>
                 </h2>
                 <h3>{movie.year}</h3>
                 <p>{movie.genre}</p>
