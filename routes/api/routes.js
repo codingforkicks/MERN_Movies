@@ -11,6 +11,9 @@ routes.route('/register')
 routes.route('/movies')
 .get(control.getMovies);
 
+routes.route('/movie/:movieId')
+.get(control.getMovieById);
+
 routes.route('/addMovie')
 .post(control.addMovie);
 

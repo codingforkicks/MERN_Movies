@@ -66,6 +66,11 @@ exports.getMovies = async (req, res) => {
   res.status(200).json(ratedMovies);
 };
 
+exports.getMovieById = async (req, res) => {
+  const movie = await Movie.find({_id: req.params.movieId });
+  res.status(200).json({ movie: movie[0] });
+}
+
 exports.addMovie = async (req, res) => {
   //check to see if movie already exists in the database
   let doesExists = await Movie.exists({
@@ -82,6 +87,8 @@ exports.addMovie = async (req, res) => {
       console.error(err);
       res.status(500).json({ error: err });
     }
+  }else {
+    res.status(200).json({message: "movie already exists"});
   }
 };
 
@@ -95,6 +102,12 @@ exports.getReviews = async (req, res) => {
 
 exports.addReview = async (req, res) => {
   console.log(req.body);
-  let query = await Review.create(req.body);
-  res.status(201).json(query);
+  try {
+    let query = await Review.create(req.body);
+    res.status(201).json(query);
+  }
+  catch(err) {
+    console.log(err)
+    res.status(406).json({err})
+  }
 };
