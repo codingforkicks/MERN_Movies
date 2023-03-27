@@ -6,8 +6,7 @@ import Register from './components/Register';
 import CreateMovie from './components/CreateMovie';
 import ShowMovieList from './components/ShowMovieList';
 import ShowMovieDetails from './components/ShowMovieDetails';
-import ShowMovieWithReviews from './components/ShowMovieWithReviews';
-import AddReviewForm from './components/AddReviewForm';
+import AddReview from './components/AddReview';
 
 
 const App = () => {
@@ -19,9 +18,8 @@ const App = () => {
           <Route exact path='/register' element={<Register />} />
           <Route path='/showList' element={<ShowMovieList />} />
           <Route path='/addMovie' element={<CreateMovie />} />
-          <Route path='/addReview' element={<AddReviewForm username='default user'/>} />
-          <Route path='/reviews/:id' element={<ShowMovieDetails />} />
-          <Route path='/movie/:id' element={<ShowMovieWithReviews />} />
+          <Route path='/movie/:id' element={<ShowMovieDetails />} />
+          <Route path='/movie/:id/addReview' element={<AddReview />} />
         </Routes>
       </div>
     </BrowserRouter>
