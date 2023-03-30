@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import FormErrors from './FormErrors';
 import '../styles/style.css';
 
@@ -43,6 +44,11 @@ const Form = (props) => {
         axios
         .post(`http://localhost:8082/${props.url}`, user)
         .then((res) => {
+            if(props.url === 'login'){
+                console.log(res.data);
+                const token = res.data;
+                props.setToken(token);
+            }
             if(res.status) {
                 setUser({
                     username: '',
@@ -195,4 +201,8 @@ const Form = (props) => {
         </div>
     );
 };
+
+Form.propTypes = {
+    setToken: PropTypes.func.isRequired
+}
 export default Form;

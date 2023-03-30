@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
@@ -8,13 +9,22 @@ import ShowMovieList from './components/ShowMovieList';
 import ShowMovieDetails from './components/ShowMovieDetails';
 import AddReview from './components/AddReview';
 
-
 const App = () => {
+  const [token, setToken] = useState();
+
+  if(!token) {
+    return (
+      <BrowserRouter>
+        <Login setToken={setToken} />
+      </BrowserRouter>
+    )
+  }
+
   return (
     <BrowserRouter>
       <div>
         <Routes>
-          <Route exact path='/' element={<Login />} />
+          <Route exact path='/' element={<Login setToken={setToken}/>} />
           <Route exact path='/register' element={<Register />} />
           <Route path='/showList' element={<ShowMovieList />} />
           <Route path='/addMovie' element={<CreateMovie />} />

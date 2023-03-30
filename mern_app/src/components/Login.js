@@ -9,7 +9,7 @@ movie page
 import React from 'react';
 import Form from './GeneralForm';
 
-const Login = (props) => {
+export default function Login({setToken}){
     return(
         <Form 
             url='login'
@@ -18,9 +18,8 @@ const Login = (props) => {
             redirectMessage={'Don\'t have an account?\nClick below to Register'}
             buttonForward='/register'
             successForward='/showList'
+            setToken={setToken}
         >
         </Form>
     );
 };
-
-export default Login;

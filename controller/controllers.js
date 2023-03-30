@@ -10,11 +10,19 @@ exports.login = async (req, res) => {
       let passwordMatch = await bcrypt.compare(req.body.password, user.password);
       if (passwordMatch) {
         let reviews = await Review.find({ enteredBy: user._id });
-        res.status(200).json({ auth: true, reviews });
+        res.status(200).json({ 
+          auth: true, 
+          reviews,
+          token: {
+            id: user._id,
+            name: user.username,
+            admin: user.admin
+          },
+        });
       } else {
         res.status(406).json({
           message: "user not authenicated",
-          auth: false
+          auth: false,
         });
       }
     } else {
