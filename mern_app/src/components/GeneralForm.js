@@ -10,16 +10,13 @@ import '../styles/style.css';
 
 const Form = (props) => {
 
-    function useForceUpdate() {
-        let [value, setState] = useState(true);
-        return () => setState(!value);
-    }
+    console.log(props.setToken);
 
     const navigate = useNavigate();
     const [user, setUser] = useState({
         username: '',
         password: '',
-        admin: false
+        admin: true
     });
 
     const [formErrors, setValidation] = useState({
@@ -49,7 +46,7 @@ const Form = (props) => {
                 const token = res.data;
                 props.setToken(token);
             }
-            if(res.status) {
+            if(res.status === 201 || res.status === 200) {
                 setUser({
                     username: '',
                     password: '',

@@ -41,13 +41,20 @@ exports.login = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-  try {
-    req.body.password = await bcrypt.hash(req.body.password, 6);
-    let query = await User.create(req.body);
-    res.status(201).json(query);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: err });
+  let user = await User.findOne({ username: req.body.username });
+  if(req.body.username === user){
+    res.status(406).json({
+      message: 'user already exists'
+    })
+  } else {
+    try {
+      req.body.password = await bcrypt.hash(req.body.password, 6);
+      let query = await User.create(req.body);
+      res.status(201).json(query);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err });
+    }
   }
 };
 
