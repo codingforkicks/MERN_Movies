@@ -8,27 +8,10 @@ import CreateMovie from './components/CreateMovie';
 import ShowMovieList from './components/ShowMovieList';
 import ShowMovieDetails from './components/ShowMovieDetails';
 import AddReview from './components/AddReview';
-
-//store token in session data
-function setToken(userToken) {
-  sessionStorage.setItem('token', JSON.stringify(userToken));
-};
-
-//get token from session data
-function getToken(){
-  //retrieve token
-  const tokenString = sessionStorage.getItem('token');
-  //turn token to obj
-  const userToken = JSON.parse(tokenString);
-  //return token obj
-  return userToken?.token;
-}
+import useToken from './components/hooks/useToken';
 
 const App = () => {
-  // const [token, setToken] = useState();
-  // console.log('appjs: token')
-  const token = getToken();
-  console.log(token);
+  const { token, setToken } = useToken();
 
   if(!token) {
     return (
