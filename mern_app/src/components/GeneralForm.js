@@ -42,9 +42,7 @@ const Form = (props) => {
         .post(`http://localhost:8082/${props.url}`, user)
         .then((res) => {
             if(props.url === 'login'){
-                console.log(res.data);
-                const token = res.data;
-                props.setToken(token);
+                props.setToken(res.data);
             }
             if(res.status === 201 || res.status === 200) {
                 setUser({
@@ -201,5 +199,6 @@ const Form = (props) => {
 
 Form.propTypes = {
     setToken: PropTypes.func.isRequired
-}
+};
+
 export default Form;
