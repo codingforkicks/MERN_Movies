@@ -9,6 +9,7 @@ import ShowMovieList from './components/ShowMovieList';
 import ShowMovieDetails from './components/ShowMovieDetails';
 import AddReview from './components/AddReview';
 import useToken from './components/hooks/useToken';
+import Unauthorized from './components/other/Unauthorized';
 
 const App = () => {
   const { token, setToken } = useToken();
@@ -30,10 +31,11 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<Login setToken={setToken}/>} />
           <Route exact path='/register' element={<Register />} />
-          <Route path='/showList' element={<ShowMovieList />} />
+          <Route path='/showList' element={<ShowMovieList admin={token.admin}/>} />
           <Route path='/addMovie' element={<CreateMovie />} />
           <Route path='/movie/:id' element={<ShowMovieDetails />} />
           <Route path='/movie/:id/addReview' element={<AddReview token={token}/>} />
+          <Route path='/404' element={<Unauthorized />} />
         </Routes>
       </div>
     </BrowserRouter>

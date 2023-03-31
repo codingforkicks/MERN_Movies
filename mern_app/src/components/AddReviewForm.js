@@ -53,7 +53,7 @@ const AddReviewForm = (props) => {
         .catch((err) => {
             console.log(`Error in create movie: ${err}`);
             alert('You\'ve already reviewed this movie');
-            //navigate('/showList');
+            navigate('/showList');
         });
     };
 
@@ -68,17 +68,6 @@ const AddReviewForm = (props) => {
                 <p className='lead text-center'>Hi {props.user.name}! Write your review for {props.movie.title} below</p>
 
                 <form onSubmit={onSubmit}>
-                <div className='form-group'>
-                    <input
-                    type='text'
-                    placeholder='movie title'
-                    name='title'
-                    className='form-control'
-                    value={props.movie.title}
-                    readOnly
-                    />
-                </div>
-                <br />
                 <label>Review: </label>
                 <div className='form-group'>
                     <textarea
@@ -112,6 +101,7 @@ const AddReviewForm = (props) => {
                     className='btn btn-outline-warning btn-block mt-4'
                     disabled={review.description.length < 10 || review.description.length > 120}
                 />
+                <br/><br/>
                 </form>
             </div>
             </div>

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import MovieCard from './MovieCard';
 import HeaderBar from './HeaderBar';
 
-function ShowMovieList() {
+function ShowMovieList(props) {
     const [movies, setMovies] = useState([]);
     
     useEffect(() => {
@@ -29,33 +29,54 @@ function ShowMovieList() {
         : movies.map((movie) => 
         <MovieCard movie={movie} key={movie.id} />
         );
-
-    return (
-        <div className='ShowMovieList'>
-        <div className='container'>
-            <div className='row'>
-            <div className='col-md-11'>
-                <HeaderBar />
-                <h2 className='display-4 text-center'>Movie List</h2>
+    if(props.admin) {
+        return (
+            <div className='ShowMovieList'>
+            <div className='container'>
+                <div className='row'>
+                <div className='col-md-11'>
+                    <HeaderBar />
+                    <h2 className='display-4 text-center'>Movie List</h2>
+                </div>
+    
+                <div className='col-md-11'>            
+                    <Link
+                    to='/addMovie'
+                    className='btn btn-outline-warning float-right'
+                    >
+                    + Add New Movie
+                    </Link>
+                    <br />
+                    <br />
+                    <hr />
+                </div>
+                </div>
+                <div className='list'>{movieList}</div>
             </div>
-
-            <div className='col-md-11'>
-                Add conditional "add movie" render for admin user                 
-                <Link
-                to='/addMovie'
-                className='btn btn-outline-warning float-right'
-                >
-                + Add New Movie
-                </Link>
-                <br />
-                <br />
-                <hr />
-            </div>
-            </div>
-            <div className='list'>{movieList}</div>
         </div>
-    </div>
-    );
+        );
+    }else{
+        return (
+            <div className='ShowMovieList'>
+            <div className='container'>
+                <div className='row'>
+                <div className='col-md-11'>
+                    <HeaderBar />
+                    <h2 className='display-4 text-center'>Movie List</h2>
+                </div>
+    
+                <div className='col-md-11'>
+                    <br />
+                    <br />
+                    <hr />
+                </div>
+                </div>
+                <div className='list'>{movieList}</div>
+            </div>
+        </div>
+        );
+    }
+
 };
 
 export default ShowMovieList;
