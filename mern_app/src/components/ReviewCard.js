@@ -5,26 +5,23 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 
 const ReviewCard = (props) => {
-    const review = props.review;
-
-    useEffect(() => {
-        console.log(props.review);
-
-    }, []);
-
+    console.log(props);
     const ReviewItem = (
         <div>
             <table className='table table-hover table-dark'>
+                <thead>
+                </thead>
                 <tbody>
                 <tr>
-                    <th scope='row'>enteredBy</th>
-                    <td>{}</td>
-                </tr>
-                <tr>
-                    <th scope='row'>Rating</th>
-                    <td>{}</td>
+                    <th scope='row'>Description:</th>
+                    <td>{props.review.description}</td>
+                    <th scope='row'>Rating:</th>
+                    <td>{props.review.rating}</td>
                 </tr>
                 </tbody>
+                <tfoot>
+                    &ensp; Entered By: {props.review._id}
+                </tfoot>
             </table>
         </div>
     );

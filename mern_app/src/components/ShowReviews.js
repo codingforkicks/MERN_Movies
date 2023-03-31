@@ -10,6 +10,7 @@ import ReviewCard from './ReviewCard';
 
 function ShowReviews() {
     const [reviews, setReviews] = useState([]);
+    const [avgRating, setAvgRating] = useState();
     const {id} = useParams();
     
     useEffect(() => {
@@ -17,22 +18,19 @@ function ShowReviews() {
         .get(`http://localhost:8082/reviews/${id}`)
         .then((res) => {
             setReviews(res.data.reviews);
+            setAvgRating(res.data.averageRating);
         }).catch((err) => {
             console.log(`Error in Show Movie: ${err}`);
         })
-    }, [reviews]);
+    }, []);
 
     //map through indivdual reviews
     const reviewList = 
         reviews.length === 0 
         ? 'Sorry, there are no reviews for this movie' 
-        : reviews.map((review) => {
-            // console.log(`review: ${review}
-            // review.description: ${review.description}
-            // review.rating ${review.rating}
-            // `);
-            <ReviewCard review={review} />
-        });
+        : reviews.map((review) =>
+            <ReviewCard review={review} key={review.id} avgRating={avgRating}/>
+        );
 
     return (
         <div className='ShowMovieList'>
@@ -41,14 +39,11 @@ function ShowReviews() {
             <div className='col-md-12'>
                 <br />
                 <h2 className='display-4 text-center'>Review List</h2>
-            </div>
-            <div className='col-md-11'>
+                <span className='rating'> Average Rating: {avgRating}</span>
+                <br/>
             </div>
             </div>
             <div className='list'>{reviewList}</div>
-            <div>
-                <ReviewCard review={reviews} />
-            </div>
         </div>
     </div>
     );
