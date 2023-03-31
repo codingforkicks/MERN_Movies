@@ -7,6 +7,7 @@ import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import MovieCard from './MovieCard';
+import HeaderBar from './HeaderBar';
 
 function ShowMovieList() {
     const [movies, setMovies] = useState([]);
@@ -33,8 +34,8 @@ function ShowMovieList() {
         <div className='ShowMovieList'>
         <div className='container'>
             <div className='row'>
-            <div className='col-md-12'>
-                <br />
+            <div className='col-md-11'>
+                <HeaderBar />
                 <h2 className='display-4 text-center'>Movie List</h2>
             </div>
 

@@ -13,6 +13,9 @@ import useToken from './components/hooks/useToken';
 const App = () => {
   const { token, setToken } = useToken();
 
+  console.log('app.js');
+  console.log(token);
+
   if(!token) {
     return (
       <BrowserRouter>

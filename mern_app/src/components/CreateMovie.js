@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import HeaderBar from './HeaderBar';
 
 const CreateMovie = (props) => {
     //define state with useState
@@ -46,10 +47,7 @@ const CreateMovie = (props) => {
         <div className='container'>
             <div className='row'>
             <div className='col-md-8 m-auto'>
-                <br />
-                <Link to='/showList' className='btn btn-outline-warning float-left'>
-                Show Movie List
-                </Link>
+                <HeaderBar />
             </div>
             <div className='col-md-8 m-auto'>
                 <h1 className='display-4 text-center'>Add Movie</h1>

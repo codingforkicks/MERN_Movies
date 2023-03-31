@@ -3,7 +3,7 @@ import '../App.css';
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import MovieCard from './MovieCard';
-import AddReviewForm from './AddReviewForm';
+import HeaderBar from './HeaderBar';
 import ShowReviews from './ShowReviews';
 
 function ShowMovieDetails() {
@@ -33,17 +33,8 @@ function ShowMovieDetails() {
         <div className='container'>
             <div className='row'>
             <div className='col-md-12'>
-            <br />
-                <Link to='/showList' className='btn btn-outline-warning float-left'>
-                    Show Movie List
-                </Link>
-                <Link to='/' className='btn btn-outline-warning float-right'>Sign Out</Link>
-                <br />
-                <br /> <br />
+                <HeaderBar />
                 <h2 className='display-4 text-center'>Movie</h2>
-            </div>
-
-            <div className='col-md-11'>
             </div>
             </div>
             <div className='list text-center'>
@@ -52,9 +43,12 @@ function ShowMovieDetails() {
             <div>
                 <ShowReviews reviews={reviews} />
             </div>
-            <Link to={`/movie/${id}/addReview`} className='btn btn-outline-warning float-left'>
-                    Add Review
-            </Link>
+            <div className='col-md-12'>
+                <Link to={`/movie/${id}/addReview`} className='btn btn-outline-warning float-right'>
+                        Add Review
+                </Link>
+            </div>
+            <br />
         </div>
     </div>
     );
