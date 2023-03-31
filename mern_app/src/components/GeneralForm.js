@@ -9,14 +9,12 @@ import FormErrors from './FormErrors';
 import '../styles/style.css';
 
 const Form = (props) => {
-
-    console.log(props.setToken);
-
     const navigate = useNavigate();
+
     const [user, setUser] = useState({
         username: '',
         password: '',
-        admin: true
+        admin: false
     });
 
     const [formErrors, setValidation] = useState({
@@ -29,18 +27,35 @@ const Form = (props) => {
         formValid: false
     });
 
+    useEffect(() => {
+        validateField();
+        console.log(`use effect form validation: 
+        username: ${formErrors.usernameValid}
+        password ${formErrors.passwordValid}
+        form valid: ${formErrors.formValid}`);
+    }, [formErrors], [user])
+
     //set event listeners
-    const onChange = (e) => {
+    const handleChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value});
         validateField(e.target.name, e.target.value);
+        console.log(formErrors);
+    };
+
+    const handleCheckBoxClick = (e) => {
+        let checkbox = document.getElementById('adminCheckbox');
+        setUser({...user, admin: checkbox.checked});
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
 
+        console.log(user);
+
         axios
         .post(`http://localhost:8082/${props.url}`, user)
         .then((res) => {
+            console.log(res.data)
             if(props.url === 'login'){
                 props.setToken(res.data);
             }
@@ -60,13 +75,14 @@ const Form = (props) => {
                     passwordValid: false,
                     formValid: false
                 });
-                
+
                 alert(`${props.url} successful`);
                 navigate(props.successForward);
             }
         })
         .catch((err) => {
             console.log(`Error in Form: ${err}`);
+            alert('user not found');
         });
     };
 
@@ -95,9 +111,9 @@ const Form = (props) => {
                     setValidation({
                         ...formErrors,
                         usernameValid: false,
-                        formValid: formErrors.passwordValid && formErrors.usernameValid
-                });
-                }
+                        formValid: false
+                    });
+                };
                 break;
             case 'password':
                 validPassword = validatePassword(value);
@@ -112,9 +128,9 @@ const Form = (props) => {
                     setValidation({
                         ...formErrors,
                         passwordValid: false,
-                        formValid: formErrors.passwordValid && formErrors.usernameValid
-                });
-                }
+                        formValid: false
+                    });
+                };
                 break;
             default:
                 break;
@@ -130,14 +146,6 @@ const Form = (props) => {
     let errorClass = (err) => {
         return(err.length === 0 ? '' : 'has-error')
     }
-
-    useEffect(() => {
-        validateField();
-        console.log(`use effect form validation: 
-        username: ${formErrors.usernameValid}
-        password ${formErrors.passwordValid}
-        form valid: ${formErrors.formValid}`);
-    }, [formErrors])
 
     return(
         <div className='GeneralForm'>
@@ -158,7 +166,9 @@ const Form = (props) => {
                         name='username'
                         className='form-control'
                         value={user.username}
-                        onChange={onChange}
+                        onChange={handleChange}
+                        onFocus={handleChange}
+                        onBlur={handleChange}
                         required
                     />
                 </div>
@@ -170,9 +180,24 @@ const Form = (props) => {
                         name='password'
                         className='form-control'
                         value={user.password}
-                        onChange={onChange}
+                        onChange={handleChange}
+                        onFocus={handleChange}
+                        onBlur={handleChange}
                         required
                     />
+                </div>
+                <div className='form-group float-right'>
+                <label form='adminCheckbox'>
+                    <input 
+                        type='checkbox'
+                        id='adminCheckbox'
+                        name="adminCheckbox"
+                        onClick={handleCheckBoxClick}
+                        disabled={!props.isAdminUser}
+                        defaultValue={false}
+                    />
+                    &nbsp;Admin User
+                </label>
                 </div>
                 <input
                     type='submit'
@@ -184,12 +209,12 @@ const Form = (props) => {
                     <FormErrors formErrors={formErrors.errors} />
                 </div>
                 <br />
-                <div>
+                {/* <div>
                     {props.redirectMessage.split('\n').map(str => <p style={{textAlign: 'right'}}>{str}</p>)}
                 </div>
                 <Link to={props.buttonForward} className='btn btn-outline-info float-right'>
                 {props.buttonTitle}
-                </Link>
+                </Link> */}
             </div>
             </div>
         </div>

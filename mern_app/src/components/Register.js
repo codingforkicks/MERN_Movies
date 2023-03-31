@@ -15,6 +15,7 @@ const Register = (props) => {
             redirectMessage={'Already have an account?\nClick below to Login'}
             buttonForward='/'
             successForward='/'
+            isAdminUser={props.admin}
         >
         </Form>
     );

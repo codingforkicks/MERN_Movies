@@ -14,9 +14,6 @@ import Unauthorized from './components/other/Unauthorized';
 const App = () => {
   const { token, setToken } = useToken();
 
-  console.log('app.js');
-  console.log(token);
-
   if(!token) {
     return (
       <BrowserRouter>
@@ -30,7 +27,7 @@ const App = () => {
       <div>
         <Routes>
           <Route exact path='/' element={<Login setToken={setToken}/>} />
-          <Route exact path='/register' element={<Register />} />
+          <Route exact path='/register' element={<Register admin={token.admin}/>} />
           <Route path='/showList' element={<ShowMovieList admin={token.admin}/>} />
           <Route path='/addMovie' element={<CreateMovie />} />
           <Route path='/movie/:id' element={<ShowMovieDetails />} />
