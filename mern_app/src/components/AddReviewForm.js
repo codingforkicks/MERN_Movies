@@ -6,18 +6,17 @@ does not work....need to get enteredBy value
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/style.css';
 import { Slider } from '@mui/material';
+import '../styles/style.css';
 
 const AddReviewForm = (props) => {
     //define state with useState
     const navigate = useNavigate();
-
-    const defaultUser = "6420dfcbe275a96fdea1ed5a";
+    const movieId = props.movie._id;
 
     const [review, setReview] = useState({
-        enteredBy: defaultUser,
-        movie: props.movie._id,
+        enteredBy: props.user.id,
+        movie: movieId,
         description: '',
         rating: 5,
     });
@@ -25,27 +24,23 @@ const AddReviewForm = (props) => {
     //set event listener
     const onChange = (e) => {
         setReview({...review, [e.target.name]: e.target.value});
-        console.log(`target.name: ${e.target.name}
-        target.value ${e.target.value}`);
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(`review: ${Object.entries(review)}`);
-        console.log(`movie: ${Object.entries(props.movie)}`);
 
         axios
         .post('http://localhost:8082/addReview', review)
         .then((res) => {
-            console.log(`movie: ${props.movie._id}`);
             console.log(res);
             setReview({
-                enteredBy: defaultUser,
-                movie: props.movie._id,
+                enteredBy: props.user.id,
+                movie: movieId,
                 description: '',
                 rating: 5,
             })
-
+            
+            alert('review created');
             navigate('/showList');
         })
         .catch((err) => {
@@ -61,18 +56,9 @@ const AddReviewForm = (props) => {
             </div>
             <div className='col-md-8 m-auto'>
                 <h1 className='display-4 text-center'>Add Review</h1>
-                <p className='lead text-center'>Write your review for {props.movie.title} below</p>
+                <p className='lead text-center'>Hi, {props.user.name}! Write your review for {props.movie.title} below</p>
 
                 <form onSubmit={onSubmit}>
-                <div className='form-group'>
-                    <input
-                    type='text'
-                    name='username'
-                    className='form-control'
-                    value={props.username}
-                    readOnly
-                    />
-                </div>
                 <div className='form-group'>
                     <input
                     type='text'
@@ -88,7 +74,7 @@ const AddReviewForm = (props) => {
                 <div className='form-group'>
                     <textarea
                     type='textarea'
-                    placeholder='Reviews have a maximum length of 120 characters'
+                    placeholder='Reviews must have a length between 10 and 120 characters'
                     name='description'
                     minLength={10}
                     maxLength={120}
@@ -115,6 +101,7 @@ const AddReviewForm = (props) => {
                 <input
                     type='submit'
                     className='btn btn-outline-warning btn-block mt-4'
+                    disabled={review.description.length < 10 || review.description.length > 120}
                 />
                 </form>
             </div>

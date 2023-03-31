@@ -5,12 +5,9 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import MovieCard from './MovieCard';
 import AddReviewForm from './AddReviewForm';
 
-function AddReview() {
+function AddReview(props) {
     const [movie, setMovie] = useState({});
-    const [reviews, setReviews] = useState({});
-
     const {id} = useParams();
-    const navigate = useNavigate();
     
     useEffect(() => {
         axios
@@ -34,7 +31,7 @@ function AddReview() {
                 <Link to='/showList' className='btn btn-outline-warning float-left'>
                     Show Movie List
                 </Link>
-                <Link to='/' className='btn btn-outline-warning float-right'>Sign Out</Link>
+                <Link to='/' className='btn btn-outline-warning float-right' onClick={() => sessionStorage.clear()}>Sign Out</Link>
                 <br /><br/>
                 <h2 className='display-4 text-center'>Movie</h2>
             </div>
@@ -45,7 +42,7 @@ function AddReview() {
                 <MovieCard movie={movie} key={movie.id} disabled={'disabled-link'}/>
             </div>
             <div>
-                <AddReviewForm movie={movie} key={movie.id} />
+                <AddReviewForm movie={movie} key={movie.id} user={props.token}/>
             </div>
         </div>
     </div>
