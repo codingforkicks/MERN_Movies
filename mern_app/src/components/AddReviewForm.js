@@ -3,7 +3,7 @@ only users can use this form to review a movie from the movies list (addReview a
 does not work....need to get enteredBy value
 */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Slider } from '@mui/material';
@@ -12,7 +12,12 @@ import '../styles/style.css';
 const AddReviewForm = (props) => {
     //define state with useState
     const navigate = useNavigate();
-    const movieId = props.movie._id;
+    let movieId = props.movie._id;
+
+    useEffect(() => {
+        movieId = props.movie_id;
+    }, [])
+    console.log(`movidID: ${movieId}`)
 
     const [review, setReview] = useState({
         enteredBy: props.user.id,
@@ -28,6 +33,8 @@ const AddReviewForm = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        setReview({...review, movie: movieId});
 
         axios
         .post('http://localhost:8082/addReview', review)
@@ -45,6 +52,8 @@ const AddReviewForm = (props) => {
         })
         .catch((err) => {
             console.log(`Error in create movie: ${err}`);
+            alert('You\'ve already reviewed this movie');
+            //navigate('/showList');
         });
     };
 
@@ -56,7 +65,7 @@ const AddReviewForm = (props) => {
             </div>
             <div className='col-md-8 m-auto'>
                 <h1 className='display-4 text-center'>Add Review</h1>
-                <p className='lead text-center'>Hi, {props.user.name}! Write your review for {props.movie.title} below</p>
+                <p className='lead text-center'>Hi {props.user.name}! Write your review for {props.movie.title} below</p>
 
                 <form onSubmit={onSubmit}>
                 <div className='form-group'>

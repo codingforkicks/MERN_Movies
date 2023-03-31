@@ -17,7 +17,7 @@ function AddReview(props) {
         }).catch((err) => {
             console.log(`Error in Show Movie: ${err}`);
         })
-    }, []);
+    }, [movie]);
 
     return (
         <div className='ShowMovieWithReviews'>
