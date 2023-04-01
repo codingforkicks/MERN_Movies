@@ -12,7 +12,7 @@ const HeaderBar = () => {
             </Link>
             <Link to='/' className='btn btn-outline-warning float-right' onClick={() => sessionStorage.clear()}>Sign Out</Link>
             <br />
-            <br /> <br />
+            <br />
         </div>
     );
 };

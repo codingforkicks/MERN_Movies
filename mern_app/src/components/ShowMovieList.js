@@ -25,58 +25,55 @@ function ShowMovieList(props) {
     //map through indivdual movies
     const movieList = 
         movies.length === 0 
-        ? 'Sorry, there are no movies' 
-        : movies.map((movie) => 
-        <MovieCard movie={movie} key={movie.id} />
+        ? 'Sorry, there are no movies' : movies.map((movie) => 
+            <MovieCard movie={movie} key={movie.id} />
         );
+
     if(props.admin) {
         return (
             <div className='ShowMovieList'>
-            <div className='container'>
-                <div className='row'>
-                <div className='col-md-11'>
-                    <HeaderBar />
-                    <h2 className='display-4 text-center'>Movie List</h2>
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-md-11'>
+                            <HeaderBar />
+                            <h2 className='display-4 text-center'>Movie List</h2>
+                        </div>
+        
+                        <div className='col-md-11'>  
+                            <Link
+                            to='/adminScreen'
+                            className='btn btn-outline-warning float-right'
+                            >
+                            + Admin Module
+                            </Link>
+                            <br />
+                            <br />
+                            <hr />
+                            <br />
+                        </div>
+                    </div>
+                    <div className='list'>{movieList}</div>
                 </div>
-    
-                <div className='col-md-11'>            
-                    <Link
-                    to='/addMovie'
-                    className='btn btn-outline-warning float-right'
-                    >
-                    + Add New Movie
-                    </Link>
-                    <br />
-                    <br />
-                    <hr />
-                </div>
-                </div>
-                <div className='list'>{movieList}</div>
             </div>
-        </div>
-        );
-    }else{
-        return (
-            <div className='ShowMovieList'>
-            <div className='container'>
-                <div className='row'>
-                <div className='col-md-11'>
-                    <HeaderBar />
-                    <h2 className='display-4 text-center'>Movie List</h2>
-                </div>
-    
-                <div className='col-md-11'>
-                    <br />
-                    <br />
-                    <hr />
-                </div>
-                </div>
-                <div className='list'>{movieList}</div>
-            </div>
-        </div>
         );
     }
 
+    return (
+        <div className='ShowMovieList'>
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-md-11'>
+                        <HeaderBar />
+                        <h2 className='display-4 text-center'>Movie List</h2>
+                        <br />
+                        <hr />
+                        <br />
+                    </div>
+                </div>
+                <div className='list'>{movieList}</div>
+            </div>
+        </div>
+    );
 };
 
 export default ShowMovieList;
