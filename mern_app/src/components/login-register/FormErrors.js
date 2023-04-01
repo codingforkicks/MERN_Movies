@@ -1,4 +1,4 @@
-/* component to show form errors */
+/* display form error messages */
 
 import React from 'react';
 
@@ -12,7 +12,7 @@ export const FormErrors = ({ formErrors }) =>
             } else {
                 return '';
             }
-        })}
+        })};
     </div>
 
 export default FormErrors;

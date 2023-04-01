@@ -3,7 +3,7 @@ in this page you can see all the admin functions
 */
 
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 import { Link } from 'react-router-dom';
 import HeaderBar from './HeaderBar';
 

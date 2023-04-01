@@ -3,11 +3,11 @@ in this page you can see all the movies title, genre, year
 */
 
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+import '../../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import MovieCard from './MovieCard';
-import HeaderBar from './HeaderBar';
+import HeaderBar from '../other/HeaderBar';
 
 function ShowMovieList(props) {
     const [movies, setMovies] = useState([]);
@@ -37,6 +37,7 @@ function ShowMovieList(props) {
                         <div className='col-md-11'>
                             <HeaderBar />
                             <h2 className='display-4 text-center'>Movie List</h2>
+                            <hr />
                         </div>
         
                         <div className='col-md-11'>  
@@ -48,15 +49,13 @@ function ShowMovieList(props) {
                             </Link>
                             <br />
                             <br />
-                            <hr />
-                            <br />
                         </div>
                     </div>
                     <div className='list'>{movieList}</div>
                 </div>
             </div>
         );
-    }
+    };
 
     return (
         <div className='ShowMovieList'>
@@ -65,7 +64,6 @@ function ShowMovieList(props) {
                     <div className='col-md-11'>
                         <HeaderBar />
                         <h2 className='display-4 text-center'>Movie List</h2>
-                        <br />
                         <hr />
                         <br />
                     </div>

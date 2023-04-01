@@ -1,12 +1,11 @@
 /*Form used for Login and Register */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FormErrors from './FormErrors';
-import '../styles/style.css';
+import '../../styles/style.css';
 
 const Form = (props) => {
     const navigate = useNavigate();
@@ -27,35 +26,23 @@ const Form = (props) => {
         formValid: false
     });
 
-    useEffect(() => {
-        validateField();
-        console.log(`use effect form validation: 
-        username: ${formErrors.usernameValid}
-        password ${formErrors.passwordValid}
-        form valid: ${formErrors.formValid}`);
-    }, [formErrors], [user])
-
     //set event listeners
     const handleChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value});
         validateField(e.target.name, e.target.value);
-        console.log(formErrors);
     };
 
     const handleCheckBoxClick = (e) => {
-        let checkbox = document.getElementById('adminCheckbox');
+        let checkbox = document.getElementById('adminCheckbox').checked;
         setUser({...user, admin: checkbox.checked});
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        console.log(user);
-
         axios
         .post(`http://localhost:8082/${props.url}`, user)
         .then((res) => {
-            console.log(res.data)
             if(props.url === 'login'){
                 props.setToken(res.data);
             }
@@ -149,75 +136,73 @@ const Form = (props) => {
 
     return(
         <div className='GeneralForm'>
-        <div className='container'>
-            <div className='row'>
-            <div className='col-md-8 m-auto'>
-                <br />
-            </div>
-            <div className='col-md-8 m-auto'>
-                <h1 className='display-4 text-center'>123 Movies</h1>
-                <p className='lead text-center'>{props.header}</p>
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-md-8 m-auto'>
+                        <br />
+                        <h1 className='display-4 text-center'>123 Movies</h1>
+                        <p className='lead text-center'>{props.header}</p>
 
-                <form onSubmit={onSubmit}>
-                <div className={`form-group ${errorClass(formErrors.errors.username)}`}>
-                    <input
-                        type='text'
-                        placeholder='Username'
-                        name='username'
-                        className='form-control'
-                        value={user.username}
-                        onChange={handleChange}
-                        onFocus={handleChange}
-                        onBlur={handleChange}
-                        required
-                    />
+                        <form onSubmit={onSubmit}>
+                            <div className={`form-group ${errorClass(formErrors.errors.username)}`}>
+                                <input
+                                    type='text'
+                                    placeholder='Username'
+                                    name='username'
+                                    className='form-control'
+                                    value={user.username}
+                                    onChange={handleChange}
+                                    onFocus={handleChange}
+                                    onBlur={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className={`form-group ${errorClass(formErrors.errors.password)}`}>
+                                <input
+                                    type='password'
+                                    id="password"
+                                    placeholder='Password'
+                                    name='password'
+                                    className='form-control'
+                                    value={user.password}
+                                    onChange={handleChange}
+                                    onFocus={handleChange}
+                                    onBlur={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className='form-group float-right'>
+                                <label form='adminCheckbox'>
+                                    <input 
+                                        type='checkbox'
+                                        id='adminCheckbox'
+                                        name="adminCheckbox"
+                                        onClick={handleCheckBoxClick}
+                                        disabled={!props.isAdminUser}
+                                        defaultValue={false}
+                                    />
+                                    &nbsp;Admin User
+                                </label>
+                            </div>
+                            <input
+                                type='submit'
+                                className='btn btn-outline-warning btn-block mt-4'
+                                disabled={!formErrors.formValid}
+                            />
+                        </form>
+                        <div className='panel panel-default'>
+                            <FormErrors formErrors={formErrors.errors} />
+                        </div>
+                        <br />
+                        {/* <div>
+                            {props.redirectMessage.split('\n').map(str => <p style={{textAlign: 'right'}}>{str}</p>)}
+                        </div>
+                        <Link to={props.buttonForward} className='btn btn-outline-info float-right'>
+                        {props.buttonTitle}
+                        </Link> */}
+                    </div>
                 </div>
-                <div className={`form-group ${errorClass(formErrors.errors.password)}`}>
-                    <input
-                        type='password'
-                        id="password"
-                        placeholder='Password'
-                        name='password'
-                        className='form-control'
-                        value={user.password}
-                        onChange={handleChange}
-                        onFocus={handleChange}
-                        onBlur={handleChange}
-                        required
-                    />
-                </div>
-                <div className='form-group float-right'>
-                <label form='adminCheckbox'>
-                    <input 
-                        type='checkbox'
-                        id='adminCheckbox'
-                        name="adminCheckbox"
-                        onClick={handleCheckBoxClick}
-                        disabled={!props.isAdminUser}
-                        defaultValue={false}
-                    />
-                    &nbsp;Admin User
-                </label>
-                </div>
-                <input
-                    type='submit'
-                    className='btn btn-outline-warning btn-block mt-4'
-                    disabled={!formErrors.formValid}
-                />
-                </form>
-                <div className='panel panel-default'>
-                    <FormErrors formErrors={formErrors.errors} />
-                </div>
-                <br />
-                {/* <div>
-                    {props.redirectMessage.split('\n').map(str => <p style={{textAlign: 'right'}}>{str}</p>)}
-                </div>
-                <Link to={props.buttonForward} className='btn btn-outline-info float-right'>
-                {props.buttonTitle}
-                </Link> */}
             </div>
-            </div>
-        </div>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import HeaderBar from "./HeaderBar";
-import oops from '../images/oops.png';
+import oops from '../../images/oops.png';
 
 const Unauthorized = () => {
     return(

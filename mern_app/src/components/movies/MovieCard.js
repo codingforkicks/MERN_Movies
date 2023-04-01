@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css';
+import '../../App.css';
 
 const MovieCard = (props) => {
     const img = 'https://images.unsplash.com/photo-1560109947-543149eceb16?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
@@ -23,7 +23,7 @@ const MovieCard = (props) => {
                 <p>{movie.genre}</p>
             </div>
         </div>
-    )
+    );
 };
 
 export default MovieCard;

@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import Login from './components/Login';
-import Register from './components/Register';
-import CreateMovie from './components/CreateMovie';
-import ShowMovieList from './components/ShowMovieList';
-import ShowMovieDetails from './components/ShowMovieDetails';
-import Unauthorized from './components/Unauthorized';
-import AddReview from './components/AddReview';
-import AdminModule from './components/AdminModule';
+import Login from './components/login-register/Login';
+import Register from './components/login-register/Register';
+import CreateMovie from './components/movies/CreateMovie';
+import ShowMovieList from './components/movies/ShowMovieList';
+import ShowMovieDetails from './components/movies/ShowMovieDetails';
+import Unauthorized from './components/other/Unauthorized';
+import AddReview from './components/reviews/AddReview';
+import AdminModule from './components/other/AdminModule';
 import useToken from './components/hooks/useToken';
 
 const App = () => {
@@ -20,8 +20,8 @@ const App = () => {
       <BrowserRouter>
         <Login setToken={setToken} />
       </BrowserRouter>
-    )
-  }
+    );
+  };
 
   if (!token.admin) {
     return (
@@ -33,7 +33,7 @@ const App = () => {
             <Route path='/movie/:id/addReview' element={<AddReview token={token}/>} />
             {['/404', '/register', '/addMovie', '/adminScreen'].map((path, index) => 
               <Route path={path} element={<Unauthorized/>} key={index} />
-            )}
+            )};
           </Routes>
       </BrowserRouter>
     );
@@ -51,7 +51,7 @@ const App = () => {
           <Route path='/movie/:id/addReview' element={<AddReview token={token}/>} />
           {['/404'].map((path, index) => 
             <Route path={path} element={<Unauthorized/>} key={index} />
-          )}
+          )};
         </Routes>
     </BrowserRouter>
   );
