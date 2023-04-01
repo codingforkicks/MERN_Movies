@@ -61,6 +61,8 @@ const CreateMovie = () => {
                                 className='form-control'
                                 value={movie.title}
                                 onChange={onChange}
+                                onFocus={onChange}
+                                onBlur={onChange}
                                 required
                                 />
                             </div>
@@ -75,6 +77,8 @@ const CreateMovie = () => {
                                 max="3000"
                                 value={movie.year}
                                 onChange={onChange}
+                                onFocus={onChange}
+                                onBlur={onChange}
                                 required
                                 />
                             </div>
@@ -86,6 +90,8 @@ const CreateMovie = () => {
                                 className='form-control'
                                 value={movie.genre}
                                 onChange={onChange}
+                                onFocus={onChange}
+                                onBlur={onChange}
                                 required
                                 />
                             </div>

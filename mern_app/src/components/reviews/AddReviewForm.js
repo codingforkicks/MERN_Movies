@@ -75,6 +75,8 @@ const AddReviewForm = (props) => {
                                 maxLength={120}
                                 className='form-control'
                                 onChange={onChange}
+                                onFocus={onChange}
+                                onBlur={onChange}
                                 required
                                 />
                             </div>
@@ -90,6 +92,8 @@ const AddReviewForm = (props) => {
                                     min={1}
                                     max={5}
                                     onChange={onChange}
+                                    onFocus={onChange}
+                                    onBlur={onChange}
                                     required
                                 />
                             </div>
