@@ -34,13 +34,13 @@ function ShowMovieList(props) {
             <div className='ShowMovieList'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-md-11'>
+                        <div className='col-md-12'>
                             <HeaderBar />
                             <h2 className='display-4 text-center'>Movie List</h2>
                             <hr />
                         </div>
         
-                        <div className='col-md-11'>  
+                        <div className='col-md-12'>  
                             <Link
                             to='/adminScreen'
                             className='btn btn-outline-warning float-right'
@@ -51,7 +51,7 @@ function ShowMovieList(props) {
                             <br />
                         </div>
                     </div>
-                    <div className='list'>{movieList}</div>
+                    <div className='list text-center'>{movieList}</div>
                 </div>
             </div>
         );
@@ -61,14 +61,14 @@ function ShowMovieList(props) {
         <div className='ShowMovieList'>
             <div className='container'>
                 <div className='row'>
-                    <div className='col-md-11'>
+                    <div className='col-md-12'>
                         <HeaderBar />
                         <h2 className='display-4 text-center'>Movie List</h2>
                         <hr />
                         <br />
                     </div>
                 </div>
-                <div className='list'>{movieList}</div>
+                <div className='list text-center'>{movieList}</div>
             </div>
         </div>
     );

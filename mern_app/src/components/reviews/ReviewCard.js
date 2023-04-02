@@ -9,13 +9,15 @@ const ReviewCard = (props) => {
             <table className='table table-hover table-dark'>
                 <tbody>
                     <tr>
-                        <th scope='row'>Description:</th>
+                        <th scope='row' className='reviewTitle'>Description:</th>
                         <td>{props.review.description}</td>
-                        <th scope='row'>Rating:</th>
+                    </tr>
+                    <tr>
+                        <th scope='row' className='reviewTitle'>Rating:</th>
                         <td>{props.review.rating}</td>
                     </tr>
                 </tbody>
-                <tfoot>
+                <tfoot className='reviewFooter'>
                     &ensp; Entered By: {props.review._id}
                 </tfoot>
             </table>
@@ -23,8 +25,8 @@ const ReviewCard = (props) => {
     );
 
     return (
-        <div className='card-container'>
-            <div className='desc'>
+        <div className='review-container'>
+            <div className='reviews'>
                 {ReviewItem}
             </div>
         </div>

@@ -42,7 +42,7 @@ function ShowReviews() {
                         <br/>
                     </div>
                 </div>
-                <div className='list'>{reviewList}</div>
+                <div className='reviewList'>{reviewList}</div>
             </div>
         </div>
     );

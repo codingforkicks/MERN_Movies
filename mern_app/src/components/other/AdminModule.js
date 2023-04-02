@@ -17,18 +17,18 @@ function AdminModule() {
                         <h2 className='display-4 text-center'>Admin Module</h2>
                         <hr />
                     </div>
-                    <div className='list adminList col-md-11'>
+                    <div className='list adminList col-md-10'>
                         <h4>Add Movie</h4>
                         <Link
                             to='/addMovie'
-                            className='btn btn-outline-warning float-center'
+                            className='btn btn-outline-warning float-center adminButton'
                             >
                             + Add New Movie
                         </Link>
                         <h4>Register User</h4>
                         <Link
                             to='/register'
-                            className='btn btn-outline-warning float-center'
+                            className='btn btn-outline-warning float-center adminButton'
                             >
                             + Register User
                         </Link>

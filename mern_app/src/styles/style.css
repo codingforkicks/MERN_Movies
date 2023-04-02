@@ -18,6 +18,10 @@ textarea:invalid {
     margin-top: 20px;
 }
 
+.adminButton {
+    padding-top: 14px;
+}
+
 .unauthImg {
     text-align: center;
     margin: 30px 0px;

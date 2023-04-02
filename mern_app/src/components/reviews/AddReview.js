@@ -38,7 +38,7 @@ function AddReview(props) {
                         <br />
                     </div>
                 </div>
-                <div className='list text-center'>
+                <div className='text-center'>
                     <MovieCard movie={movie} key={movie.id} disabled={'disabled-link'}/>
                 </div>
                 <div className='col-md-12'>
