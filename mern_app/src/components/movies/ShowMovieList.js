@@ -29,34 +29,6 @@ function ShowMovieList(props) {
             <MovieCard movie={movie} key={movie.id} />
         );
 
-    if(props.admin) {
-        return (
-            <div className='ShowMovieList'>
-                <div className='container'>
-                    <div className='row'>
-                        <div className='col-md-12'>
-                            <HeaderBar />
-                            <h2 className='display-4 text-center'>Movie List</h2>
-                            <hr />
-                        </div>
-        
-                        <div className='col-md-12'>  
-                            <Link
-                            to='/adminScreen'
-                            className='btn btn-outline-warning float-right'
-                            >
-                            + Admin Module
-                            </Link>
-                            <br />
-                            <br />
-                        </div>
-                    </div>
-                    <div className='list text-center'>{movieList}</div>
-                </div>
-            </div>
-        );
-    };
-
     return (
         <div className='ShowMovieList'>
             <div className='container'>
@@ -65,8 +37,18 @@ function ShowMovieList(props) {
                         <HeaderBar />
                         <h2 className='display-4 text-center'>Movie List</h2>
                         <hr />
-                        <br />
                     </div>
+    
+                    {props.admin ? <div className='col-md-12'>  
+                        <Link
+                        to='/adminScreen'
+                        className='btn btn-outline-warning float-right'
+                        >
+                        + Admin Module
+                        </Link>
+                        <br />
+                        <br />
+                    </div> : <br /> }
                 </div>
                 <div className='list text-center'>{movieList}</div>
             </div>
