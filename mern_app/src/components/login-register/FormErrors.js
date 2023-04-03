@@ -12,7 +12,7 @@ export const FormErrors = ({ formErrors }) =>
             } else {
                 return '';
             }
-        })};
+        })}
     </div>
 
 export default FormErrors;
