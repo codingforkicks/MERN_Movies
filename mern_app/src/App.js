@@ -28,10 +28,11 @@ const App = () => {
       <BrowserRouter>
           <Routes>
             <Route exact path='/' element={<Login setToken={setToken}/>} />
+            <Route exact path='/register' element={<Register admin={token.admin}/>} />
             <Route path='/showList' element={<ShowMovieList admin={token.admin}/>} />
             <Route path='/movie/:id' element={<ShowMovieDetails />} />
             <Route path='/movie/:id/addReview' element={<AddReview token={token}/>} />
-            {['/404', '/register', '/addMovie', '/adminScreen'].map((path, index) => 
+            {['/404', '/addMovie', '/adminScreen'].map((path, index) => 
               <Route path={path} element={<Unauthorized/>} key={index} />
             )};
           </Routes>

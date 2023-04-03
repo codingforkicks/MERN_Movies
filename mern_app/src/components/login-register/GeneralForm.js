@@ -171,7 +171,7 @@ const Form = (props) => {
                                     required
                                 />
                             </div>
-                            {props.isAdminUser && props.url === 'register' ? <div className='form-group float-right'>
+                            {props.isAdminUser && props.url ==='register' ? <div className='form-group float-right'>
                                 <label form='adminCheckbox'>
                                     <input 
                                         type='checkbox'

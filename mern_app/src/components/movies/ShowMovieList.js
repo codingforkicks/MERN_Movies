@@ -48,7 +48,17 @@ function ShowMovieList(props) {
                         </Link>
                         <br />
                         <br />
-                    </div> : <br /> }
+                        </div> : <div className='col-md-12'>  
+                            <Link
+                            to='/register'
+                            className='btn btn-outline-warning float-right'
+                            >
+                            + Register
+                            </Link>
+                            <br />
+                            <br />
+                        </div>
+                    }
                 </div>
                 <div className='list text-center'>{movieList}</div>
             </div>
