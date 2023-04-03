@@ -81,7 +81,7 @@ const Form = (props) => {
 
         const errMessages = {
             username: 'must be at least 5 characters',
-            password: 'must begin with a letter, be at least 8 characters, and contain at least 1 capital letter, 1 lowercase letter, 1 number, and 1 symbol'
+            password: 'must begin with a letter, be at least 10 characters, and contain at least 1 capital letter, 1 lowercase letter, 1 number, and 1 symbol'
         }
 
         switch(fieldName) {
@@ -125,7 +125,7 @@ const Form = (props) => {
     };
 
     let validatePassword = (pass) => {
-        let passREGEX = new RegExp ('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
+        let passREGEX = new RegExp ('(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{10,}).*');
         let result = passREGEX.test(pass);
         return result;
     }
